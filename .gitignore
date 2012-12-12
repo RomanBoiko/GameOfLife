@@ -1,6 +1,8 @@
 #auxiliary
 .gradle
 target
+bin
+build
 
 #eclipse
 .settings
