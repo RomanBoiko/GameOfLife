@@ -1,6 +1,8 @@
-*.class
+#auxiliary
+.gradle
+target
 
-# Package Files #
-*.jar
-*.war
-*.ear
+#eclipse
+.settings
+.classpath
+.project
