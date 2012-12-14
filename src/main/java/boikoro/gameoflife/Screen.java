@@ -1,5 +1,6 @@
 package boikoro.gameoflife;
 
+import java.awt.Dimension;
 import java.awt.Point;
 
 /**
@@ -7,5 +8,7 @@ import java.awt.Point;
  */
 
 public interface Screen {
+	void resetScreenAsEmptyGridWithDimension(Dimension dimension);
 	void drawAliveCell(Point cellPosition);
+	void flush();
 }
