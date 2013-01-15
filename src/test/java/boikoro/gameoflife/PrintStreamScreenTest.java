@@ -36,19 +36,21 @@ public class PrintStreamScreenTest {
 
 	@Test
 	public void shouldResetScreenAsEmptyGridWithGivenDimensionAndPrintAsEmptyMatrix() {
-		Screen screen = screen(printStream);
-		screen.resetScreenAsEmptyGridWithDimension(dimension(2,2));
-		screen.flush();
+		screen(printStream)
+			.open(dimension(2,2))
+			.clearScreen()
+			.flush();
 		verify(printStream, times(2)).append(eq(EMPTY_CELL+EMPTY_CELL+"\n"));
 		verify(printStream).flush();
 	}
 	
 	@Test
 	public void shouldDrawOnScreen() {
-		Screen screen = screen(printStream);
-		screen.resetScreenAsEmptyGridWithDimension(dimension(2,1));
-		screen.drawAliveCell(new Point(2,1));
-		screen.flush();
+		screen(printStream)
+			.open(dimension(2,1))
+			.clearScreen()
+			.drawAliveCell(new Point(2,1))
+			.flush();
 		verify(printStream).append(eq(EMPTY_CELL+FULL_CELL+"\n"));
 		verify(printStream).flush();
 	}

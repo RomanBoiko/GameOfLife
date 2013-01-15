@@ -88,13 +88,13 @@ public class GenerationTest {
 
 
 	@Test
-	public void shouldResetScreenOnceAsEmtyGridOfSameDimensionBeforeDrawingOnIt() {
+	public void shouldResetScreenOnceAsEmtyGrid() {
 		initialGeneration(DIMENSION)
 			.addAliveCellsToGeneration(
 					cell(WIDTH, HEIGHT),
 					cell(1, 1))
 			.drawOn(screenMock);
-		verify(screenMock, times(1)).resetScreenAsEmptyGridWithDimension(eq(DIMENSION));
+		verify(screenMock, times(1)).clearScreen();
 		verify(screenMock, times(2)).drawAliveCell(any(Point.class));
 	}
 
@@ -115,7 +115,7 @@ public class GenerationTest {
 			.addAliveCellsToGeneration(cell(WIDTH, HEIGHT))
 			.drawOn(screenMock);
 		InOrder inOrder = inOrder(screenMock);
-		inOrder.verify(screenMock).resetScreenAsEmptyGridWithDimension(any(Dimension.class));
+		inOrder.verify(screenMock).clearScreen();
 		inOrder.verify(screenMock).drawAliveCell(any(Point.class));
 		inOrder.verify(screenMock).flush();
 	}

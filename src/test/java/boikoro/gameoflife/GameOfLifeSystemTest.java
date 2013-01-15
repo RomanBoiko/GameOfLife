@@ -16,8 +16,11 @@ public class GameOfLifeSystemTest {
 	@Test
 	public void shouldDrawEvolutionMatrixFigureBlockNumberOfTimes() {
 		System.out.println("====BLOCK");
-		Screen screen = PrintStreamScreen.screen(System.out);
-		Generation initialGeneration = initialGeneration(new Dimension(4,4))
+		Dimension dimension = new Dimension(4,4);
+		Screen screen =
+				PrintStreamScreen.screen(System.out)
+					.open(dimension);
+		Generation initialGeneration = initialGeneration(dimension)
 				.addAliveCellsToGeneration(
 						new Point(2,2),
 						new Point(3,2),
@@ -30,8 +33,11 @@ public class GameOfLifeSystemTest {
 	@Test
 	public void shouldDrawEvolutionMatrixFigureBeacon() {
 		System.out.println("====BEACON");
-		Screen screen = PrintStreamScreen.screen(System.out);
-		Generation initialGeneration = initialGeneration(new Dimension(4,4))
+		Dimension dimension = new Dimension(4,4);
+		Screen screen = 
+				PrintStreamScreen.screen(System.out)
+					.open(dimension);
+		Generation initialGeneration = initialGeneration(dimension)
 				.addAliveCellsToGeneration(
 						new Point(1,1),
 						new Point(1,2),

@@ -8,7 +8,9 @@ import java.awt.Point;
  */
 
 public interface Screen {
-	void resetScreenAsEmptyGridWithDimension(Dimension dimension);
-	void drawAliveCell(Point cellPosition);
-	void flush();
+	Screen open(Dimension dimension);
+	Screen clearScreen();
+	Screen drawAliveCell(Point cellPosition);
+	Screen flush();
+	Screen close();
 }

@@ -56,6 +56,7 @@ public class Generation {
 		if(cellPositionIsInValidBoundaries(aliveCellPosition)) {
 			this.aliveCells.add(aliveCellPosition);
 		}
+		//TODO: throw if position invalid
 	}
 
 	private boolean cellPositionIsInValidBoundaries(Point cellPosition) {
@@ -101,11 +102,16 @@ public class Generation {
 	}
 
 	public Generation drawOn(Screen screen) {
-		screen.resetScreenAsEmptyGridWithDimension(new Dimension(MAX_X, MAX_Y));
+		screen.clearScreen();
 		for(Point aliveCell: aliveCells) {
 			screen.drawAliveCell(aliveCell);
 		}
 		screen.flush();
 		return this;
+	}
+	
+	@Deprecated
+	public Dimension getDimension() {
+		return new Dimension(MAX_X, MAX_Y);
 	}
 }

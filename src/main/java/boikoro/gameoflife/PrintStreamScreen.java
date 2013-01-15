@@ -16,16 +16,25 @@ public class PrintStreamScreen implements Screen {
 	
 	private PrintStream printStream;
 	private Map<Integer, StringBuffer> matrixRows;
+	private Dimension dimension;
 	
 	private PrintStreamScreen(PrintStream printStream){
 		this.printStream = printStream;
 		this.matrixRows = new HashMap<Integer, StringBuffer>();
 	}
-	public static PrintStreamScreen screen(PrintStream printStream) {
+	public static Screen screen(PrintStream printStream) {
 		return new PrintStreamScreen(printStream);
 	}
 
-	public void resetScreenAsEmptyGridWithDimension(Dimension dimension) {
+	@Override
+	public Screen open(Dimension dimension) {
+		this.dimension = dimension;
+		clearScreen();
+		return this;
+	}
+	
+	@Override
+	public Screen clearScreen() {
 		for(int y = 1; y<=dimension.height; y++) {
 			StringBuffer buffer = new StringBuffer();
 			for(int x = 1; x<=dimension.width; x++) {
@@ -34,18 +43,27 @@ public class PrintStreamScreen implements Screen {
 			buffer.append('\n');
 			matrixRows.put(y, buffer);
 		}
-		
+		return this;
 	}
 
-	public void drawAliveCell(Point cellPosition) {
+	@Override
+	public Screen drawAliveCell(Point cellPosition) {
 		matrixRows.get(cellPosition.y).setCharAt(cellPosition.x-1, FULL_CELL);
+		return this;
 	}
 
-	public void flush() {
+	@Override
+	public Screen flush() {
 		for (int i = 0; i < matrixRows.size(); i++) {
 			printStream.append(matrixRows.get(i+1).toString());
 		}
 		printStream.flush();
+		return this;
 	}
 
+	@Override
+	public Screen close() {
+		matrixRows = null;
+		return this;
+	}
 }
